@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Beauty, Products, Coment
 admin.site.register(Beauty)
 
-admin.site.register(Coment)
+
 
 
 @admin.register(Products)
