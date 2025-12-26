@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .detail-wrapper {
+        width: 100%;
+        background-color: #fbf4ef;
+        padding: 90px 0;
+    }
+
+    .detail-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 70px;
+        padding: 0 30px;
+    }
+
+    .detail-text {
+        flex: 1;
+    }
+
+    .detail-text h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 52px;
+        font-weight: 400;
+        margin-bottom: 15px;
+        color: #111;
+    }
+
+    .detail-text p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #444;
+        max-width: 420px;
+        margin-bottom: 25px;
+    }
+
+    .detail-price {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #000;
+    }
+
+    .detail-btn {
+        display: inline-block;
+        padding: 12px 34px;
+        background-color: #111;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .detail-btn:hover {
+        opacity: 0.85;
+    }
+
+    .detail-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .detail-image img {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    @media (max-width: 768px) {
+        .detail-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .detail-text p {
+            margin: auto auto 25px;
+        }
+    }
+</style>
+
+<div class="detail-wrapper">
+    <div class="detail-container">
+
+        <!-- LEFT -->
+        <div class="detail-text">
+            <h1>{{ p.name }}</h1>
+            <p>{{ p.text }}</p>
+
+            <div class="detail-price">
+                ${{ p.price }}
+            </div>
+
+            <a href="{% url 'index' %}" class="detail-btn">Orqaga</a>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="detail-image">
+            <img src="{{ p.img.url }}" alt="{{ p.name }}">
+        </div>
+
+    </div>
+</div>
+{% endblock %}
