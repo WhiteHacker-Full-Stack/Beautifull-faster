@@ -51,8 +51,14 @@
                <a class="logo" href="index.html"><img src="{% static 'images/logo.png' %}"></a></a>
                <form class="form-inline ">
                   <div class="login_text">
-                     <ul>
-                        <li><a href="#"><img src="{% static 'images/user-icon.png' %}"></a></li>
+                     <ul class="">
+                        {% if request.user.is_authenticated %}
+                        <li><a class="text-dark" href="{% url 'profile' %}">Profile</a></li>
+                        <li><a href="{% url 'logout' %}"><img src="{% static 'images/user-icon.png' %}"></a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}"><img src="{% static 'images/user-icon.png' %}"></a></li>
+                        <li><a class="text-dark" href="{% url 'register' %}">Sign Up</a></li>
+                        {% endif %}
                         <li><a href="#"><img src="{% static 'images/bag-icon.png' %}"></a></li>
                         <li><a href="#"><img src="{% static 'images/search-icon.png' %}"></a></li>
                      </ul>

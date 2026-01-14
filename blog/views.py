@@ -1,5 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template.defaultfilters import title
+from django.views.generic import CreateView,UpdateView,DeleteView
+from user.models import Izoh
 
 from .models import Beauty,Products
 # Create your views here.
@@ -35,8 +38,19 @@ def products(request):
     }
     return render(request, 'products.html',context=malumot)
 
-
+@login_required(login_url='/user/login/')
 def detail(request,id):
+    user = request.user
     title = 'detail'
     product = Products.objects.get(id=id)
-    return render(request, 'detail.html', context={'title':title, 'p':product})
+    izohlar = Izoh.objects.filter(product=product)
+    if request.method == 'POST':
+        text = request.POST['text']
+        izoh = Izoh.objects.create(text=text, product=product,user=user)
+    return render(request, 'detail.html', context={'title':title, 'p':product, 'izohlar':izohlar})
+
+class ProductsCreate(CreateView):
+    model = Products
+    template_name = 'crud/create.html'
+    success_url = '/'
+    fields = ['name', 'text', 'img', 'price']

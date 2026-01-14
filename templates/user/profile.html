@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0">
+                <div class="card-body p-4">
+
+                    <!-- Header -->
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-4">
+                            {% if profile.foto %}
+                                <img src="{{ profile.foto.url }}"
+                                     class="rounded-circle"
+                                     style="width:120px;height:120px;object-fit:cover;">
+                            {% else %}
+                                <img src="https://via.placeholder.com/120"
+                                     class="rounded-circle">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h3 class="mb-1">{{ user.username }}</h3>
+                            <p class="text-muted mb-0">{{ user.email }}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Profile info -->
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-2">
+                            <strong>Ism:</strong>
+                            <div class="text-muted">{{ profile.ism|default:"Palonchi" }}</div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Familiya:</strong>
+                            <div class="text-muted">{{ profile.familiya }}</div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-2">
+                            <strong>Tug‘ilgan sana:</strong>
+                            <div class="text-muted">{{ profile.tug_sana }}</div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Telefon:</strong>
+                            <div class="text-muted">{{ profile.nomer }}</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <strong>Bio:</strong>
+                        <p class="text-muted mt-1">
+                            {{ profile.bio|default:"Ma'lumot kiritilmagan" }}
+                        </p>
+                    </div>
+
+                    <hr>
+
+                    <!-- Buttons -->
+                    <div class="d-flex flex-wrap gap-2 justify-content-between">
+
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'profile_edit' %}" class="btn btn-dark">
+                                Tahrirlash
+                            </a>
+
+                            <a href="{% url 'password_change2' %}" class="btn btn-outline-secondary">
+                                Parolni o‘zgartirish
+                            </a>
+                        </div>
+
+                        <a href="{% url 'index' %}" class="btn btn-outline-primary">
+                            Orqaga
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
